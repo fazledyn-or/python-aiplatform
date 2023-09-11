@@ -1067,7 +1067,7 @@ class PipelineJob(
         job_id = job_id or re.sub(
             r"[^-a-z0-9]", "-", automatic_display_name.lower()
         ).strip("-")
-        pipeline_file = tempfile.mktemp(suffix=".json")
+        pipeline_file = tempfile.NamedTemporaryFile(suffix=".json").name
         compiler_v2.Compiler().compile(
             pipeline_func=pipeline_func,
             pipeline_name=context_name,
